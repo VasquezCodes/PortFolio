@@ -2,25 +2,121 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #020073;
+  --gray: #6b6b6b;
+  --light-gray: #F6F9F7;
+  --light-blue: #E6FFFE;
+  --lighter-blue: #E9FFFF;
+  --soft-gray: #EDEDED;
+  --medium-gray: #F0F0F0;
+  --pale-gray: #F1F1F1;
+  --mint: #F5FFF8;
+  --near-white: #FEFEFE;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
 }
 
 body {
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: #171717;
+}
+
+/* Gradient blue square */
+.blue-square {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #020073 0%, #E6FFFE 100%);
+  border-radius: 8px;
+  display: inline-block;
+  margin-right: 1rem;
+  vertical-align: middle;
+}
+
+/* Animaciones personalizadas para el hero */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Suavizado de transiciones */
+.cinematic-container {
+  will-change: transform, opacity;
+}
+
+/* Mejora de rendimiento para animaciones */
+.hero-line {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Loading Screen Retro Effects */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.font-mono {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+/* CRT Screen Effect */
+@keyframes flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.98;
+  }
+}
+
+/* Glitch Effect para el texto de carga */
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
 }
