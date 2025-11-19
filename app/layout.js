@@ -1,4 +1,4 @@
-import { Inter, Urbanist, Poppins, Space_Mono } from "next/font/google";
+import { Inter, Urbanist, Poppins, Space_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -25,16 +25,23 @@ const spaceMono = Space_Mono({
   weight: ["400", "700"],
 });
 
+const playfair = Playfair_Display({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "900"],
+  style: ["normal", "italic"],
+});
+
 export const metadata = {
-  title: "Portafolio 3D | Cyberpunk Edition",
-  description: "Portafolio interactivo 3D con React Three Fiber y Next.js",
+  title: "Portafolio 3D | Roberto Vasquez",
+  description: "Portafolio interactivo con Next.js",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body
-        className={`${inter.variable} ${urbanist.variable} ${poppins.variable} ${spaceMono.variable} antialiased`}
+        className={`${inter.variable} ${urbanist.variable} ${poppins.variable} ${spaceMono.variable} ${playfair.variable} antialiased`}
       >
         {children}
       </body>
