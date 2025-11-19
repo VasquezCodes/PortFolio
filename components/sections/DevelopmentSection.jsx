@@ -76,9 +76,7 @@ const DevelopmentSection = () => {
                         <h3 className="text-3xl md:text-4xl font-bold leading-tight">
                             From <span className="text-gray-400 font-mono">&lt;Code /&gt;</span> to <span className="text-orange-500">Reality</span>
                         </h3>
-                        <p className="text-gray-600 text-base md:text-lg leading-relaxed">
-                            I don't just write code; I craft experiences. Watch as the code on the left instantly builds the interface on the right.
-                        </p>
+
                         <div className="flex flex-wrap justify-center lg:justify-start gap-4 text-sm font-medium text-gray-500">
                             <div className="flex items-center gap-2">
                                 <div className="w-2 h-2 rounded-full bg-green-500"></div>
