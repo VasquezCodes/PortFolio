@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import StepIndicator from '../ui/StepIndicator'
 import CodeWindow from '../ui/CodeWindow'
 import LivePreview from '../ui/LivePreview'
+import { useLanguage } from '@/context/LanguageContext'
 
 const DevelopmentSection = () => {
     const [sliderPosition, setSliderPosition] = useState(50)
@@ -12,6 +13,7 @@ const DevelopmentSection = () => {
     const [currentStep, setCurrentStep] = useState(0) // 0: Start, 1: Navbar, 2: Hero, 3: Grid, 4: Newsletter
     const containerRef = useRef(null)
     const isDragging = useRef(false)
+    const { t } = useLanguage()
 
     const handleStepComplete = (step) => {
         setCurrentStep(prev => Math.max(prev, step))
@@ -64,27 +66,27 @@ const DevelopmentSection = () => {
                     className="mb-12 md:mb-16"
                 >
                     <StepIndicator
-                        number="07"
-                        line1="Finally, I code and"
+                        number={t.development.step}
+                        line1={t.development.line1}
                         line2="!"
-                        highlightedWord="bring it to life"
+                        highlightedWord={t.development.highlightedWord}
                     />
                 </motion.div>
 
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
                     <div className="w-full lg:w-1/3 space-y-6 md:space-y-8 text-center lg:text-left">
                         <h3 className="text-3xl md:text-4xl font-bold leading-tight">
-                            From <span className="text-gray-400 font-mono">&lt;Code /&gt;</span> to <span className="text-orange-500">Reality</span>
+                            {t.development.title.prefix} <span className="text-gray-400 font-mono">{t.development.title.code}</span> {t.development.title.middle} <span className="text-orange-500">{t.development.title.suffix}</span>
                         </h3>
 
                         <div className="flex flex-wrap justify-center lg:justify-start gap-4 text-sm font-medium text-gray-500">
                             <div className="flex items-center gap-2">
                                 <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                                Clean Architecture
+                                {t.development.cleanArch}
                             </div>
                             <div className="flex items-center gap-2">
                                 <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                                Interactive UI
+                                {t.development.interactiveUI}
                             </div>
                         </div>
                     </div>
@@ -116,7 +118,7 @@ const DevelopmentSection = () => {
 
                             {sliderPosition === 50 && !isDragging.current && (
                                 <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-xs font-medium pointer-events-none animate-pulse z-40">
-                                    Drag to resize
+                                    {t.development.dragResize}
                                 </div>
                             )}
                         </div>

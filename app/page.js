@@ -7,13 +7,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import LoadingScreen from '@/components/LoadingScreen'
 import Sidebar from '@/components/Sidebar'
+import MobileNav from '@/components/MobileNav'
 import HeroSection from '@/components/sections/HeroSection'
 import ProcessSection from '@/components/sections/ProcessSection'
 import AnalysisSection from '@/components/sections/AnalysisSection'
 import SolutionSection from '@/components/sections/SolutionSection'
 import DevelopmentSection from '@/components/sections/DevelopmentSection'
 import ProjectsSection from '@/components/sections/ProjectsSection'
+import FAQSection from '@/components/sections/FAQSection'
 import AboutSection from '@/components/sections/AboutSection'
+import { useLanguage } from '@/context/LanguageContext'
+import ContactDrawer from '@/components/ContactDrawer'
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
@@ -22,8 +26,23 @@ if (typeof window !== 'undefined') {
 export default function Home() {
   const [activeSection, setActiveSection] = useState('home')
   const [isLoading, setIsLoading] = useState(true)
+  const [isContactOpen, setIsContactOpen] = useState(false)
+  const { language, t } = useLanguage()
+
+  // Reload animation when language changes
+  useEffect(() => {
+    if (!isLoading) {
+      setIsLoading(true)
+      window.scrollTo(0, 0)
+    }
+  }, [language])
 
   useEffect(() => {
+    if (isLoading) return // Don't setup animations while loading
+
+    // Kill existing ScrollTriggers to prevent duplicates
+    ScrollTrigger.getAll().forEach(t => t.kill())
+
     // Animaciones de scroll para los mensajes de chat
     gsap.utils.toArray('.chat-message-1, .chat-message-2, .chat-message-3').forEach((element) => {
       const direction = element.classList.contains('chat-message-2') ? 80 : -80
@@ -111,7 +130,34 @@ export default function Home() {
       }
     )
 
-  }, [])
+    // Active Section Tracking
+    // Projects Section
+    ScrollTrigger.create({
+      trigger: '#projects',
+      start: 'top 70%',
+      end: 'bottom 70%',
+      onEnter: () => setActiveSection('projects'),
+      onLeave: () => setActiveSection('about'),
+      onEnterBack: () => setActiveSection('projects'),
+      onLeaveBack: () => setActiveSection('home')
+    })
+
+    // About Section
+    ScrollTrigger.create({
+      trigger: '#about',
+      start: 'top 70%',
+      onEnter: () => setActiveSection('about'),
+      onLeaveBack: () => setActiveSection('projects')
+    })
+
+    // Force refresh to ensure correct positions
+    ScrollTrigger.refresh()
+
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill())
+    }
+
+  }, [isLoading])
 
   const scrollToSection = (sectionId) => {
     setActiveSection(sectionId)
@@ -128,29 +174,43 @@ export default function Home() {
         {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
 
-      {/* SIDEBAR NAVIGATION */}
-      <Sidebar activeSection={activeSection} scrollToSection={scrollToSection} />
+      {/* CONTACT DRAWER */}
+      <ContactDrawer isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
 
-      {/* MAIN CONTENT - with left margin for sidebar */}
-      <main className="ml-80 text-gray-900" style={{ backgroundColor: 'var(--background)' }}>
-
-        {/* WORK WITH ME BUTTON - Fixed top right */}
-        <button className="fixed top-8 right-8 z-40 px-6 py-3 font-bold rounded-lg transition-all flex items-center gap-2 shadow-lg" style={{ backgroundColor: 'var(--foreground)', color: 'var(--background)' }}>
-          <span>Work with me</span>
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </button>
+      {/* MAIN CONTENT - Responsive margins */}
+      <main key={language} className="md:ml-80 ml-0 text-gray-900 relative z-0" style={{ backgroundColor: 'var(--background)' }}>
 
         <HeroSection isLoading={isLoading} />
-        <ProcessSection />
+        <ProcessSection onOpenContact={() => setIsContactOpen(true)} />
         <AnalysisSection />
         <SolutionSection />
         <DevelopmentSection />
+        <FAQSection />
         <ProjectsSection />
         <AboutSection />
 
       </main>
+
+      {/* NAVIGATION & FLOATING ELEMENTS - Rendered last to ensure they are on top */}
+      {!isLoading && (
+        <>
+          <Sidebar activeSection={activeSection} scrollToSection={scrollToSection} />
+          <MobileNav activeSection={activeSection} scrollToSection={scrollToSection} />
+
+          {/* WORK WITH ME BUTTON - Fixed top right on desktop, bottom right on mobile */}
+          <button
+            onClick={() => setIsContactOpen(true)}
+            className="fixed bottom-8 right-4 md:top-8 md:right-8 md:bottom-auto z-[9999] px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-bold rounded-lg transition-all flex items-center gap-2 shadow-lg hover:scale-105 active:scale-95"
+            style={{ backgroundColor: 'var(--foreground)', color: 'var(--background)' }}
+          >
+            <span>{t.nav.workWithMe}</span>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </button>
+        </>
+      )}
     </>
   )
 }
+

@@ -1,36 +1,40 @@
 "use client"
 
+import { useLanguage } from '@/context/LanguageContext'
+
 const AboutSection = () => {
+    const { t } = useLanguage()
+
     return (
-        <section id="about" className="min-h-screen px-16 py-32" style={{ backgroundColor: 'var(--background)' }}>
+        <section id="about" className="min-h-screen px-4 md:px-16 py-32" style={{ backgroundColor: 'var(--background)' }}>
             <div className="max-w-6xl mx-auto">
                 <div className="mb-16">
-                    <h1 className="text-5xl md:text-7xl font-bold mb-4" style={{ color: 'var(--foreground)' }}>Roberto Vasquez</h1>
-                    <h3 className="text-2xl text-gray-600 mb-8">Full Stack Developer</h3>
-                    <p className="text-lg text-gray-500 mb-4">📍 Buenos Aires, Argentina</p>
+                    <h1 className="text-4xl md:text-7xl font-bold mb-4" style={{ color: 'var(--foreground)' }}>{t.about.title}</h1>
+                    <h3 className="text-2xl text-gray-600 mb-8">{t.about.role}</h3>
+                    <p className="text-lg text-gray-500 mb-4">{t.about.location}</p>
 
                     <div className="space-y-6 text-lg text-gray-700 leading-relaxed max-w-3xl">
                         <h5 className="text-xl font-semibold" style={{ color: 'var(--foreground)' }}>
-                            I build modern, scalable web applications with clean code and robust architecture.
+                            {t.about.description1}
                         </h5>
 
                         <div>
-                            Passionate about web development and problem-solving, I focus on creating efficient, maintainable solutions. From frontend interfaces to backend systems, I ensure every aspect of the project meets high technical standards.
+                            {t.about.description2}
                         </div>
 
                         <h5 className="text-xl font-semibold" style={{ color: 'var(--foreground)' }}>
-                            Full-stack development with modern technologies.
+                            {t.about.subtitle}
                         </h5>
 
                         <div>
-                            I work with React, Next.js, Node.js, and modern frameworks to deliver production-ready applications. My clients value my technical expertise and commitment to quality code.
+                            {t.about.description3}
                         </div>
                     </div>
                 </div>
 
                 {/* Skills */}
                 <div className="max-w-3xl mx-auto mt-20">
-                    <h4 className="text-xl font-bold mb-8 text-center">.Tech Stack</h4>
+                    <h4 className="text-xl font-bold mb-8 text-center">{t.about.techStack}</h4>
                     <div className="flex gap-3 flex-wrap justify-center">
                         {/* React */}
                         <span className="px-4 py-2 bg-white rounded-full border border-gray-200 text-sm font-medium flex items-center gap-2 transition-all duration-300 hover:shadow-md hover:scale-105">
@@ -68,11 +72,6 @@ const AboutSection = () => {
                         </span>
                     </div>
                 </div>
-
-                {/* Footer */}
-                <footer className="mt-20 text-center text-gray-500 text-sm pt-12 border-t border-gray-200">
-                    <span>© 2025 - Designed and developed with passion</span>
-                </footer>
             </div>
         </section>
     )

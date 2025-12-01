@@ -37,13 +37,17 @@ export const metadata = {
   description: "Portafolio interactivo con Next.js",
 };
 
+import { LanguageProvider } from "@/context/LanguageContext";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body
         className={`${inter.variable} ${urbanist.variable} ${poppins.variable} ${spaceMono.variable} ${playfair.variable} antialiased`}
       >
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

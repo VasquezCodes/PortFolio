@@ -1,17 +1,20 @@
 "use client"
 
 import StepIndicator from '../ui/StepIndicator'
+import { useLanguage } from '@/context/LanguageContext'
 
-const ProcessSection = () => {
+const ProcessSection = ({ onOpenContact }) => {
+    const { t } = useLanguage()
+
     return (
-        <section id="process" className="min-h-screen px-16 py-32 relative" style={{ backgroundColor: 'var(--background)' }}>
+        <section id="process" className="min-h-screen px-4 md:px-16 py-32 relative" style={{ backgroundColor: 'var(--background)' }}>
 
             {/* Step indicator con typewriter effect */}
             <StepIndicator
-                number="01"
-                line1="First, we need an"
+                number={t.process.step}
+                line1={t.process.line1}
                 line2="..."
-                highlightedWord="idea"
+                highlightedWord={t.process.highlightedWord}
                 className="mb-32"
             />
 
@@ -22,15 +25,13 @@ const ProcessSection = () => {
                 <div className="story-text chat-message-1 flex justify-start">
                     <div className="max-w-2xl">
                         <div className="bg-gray-200 rounded-3xl rounded-tl-sm px-6 py-4 shadow-sm">
-                            <span className="text-base leading-relaxed text-gray-900" style={{ fontFamily: 'var(--font-body)' }}>
-                                I need a <span className="font-semibold">modern website</span> for my company, something professional.
-                            </span>
+                            <span className="text-base leading-relaxed text-gray-900" style={{ fontFamily: 'var(--font-body)' }} dangerouslySetInnerHTML={{ __html: t.process.message1 }} />
                         </div>
                         <div className="flex items-center gap-2 mt-2 px-2">
                             <div className="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center text-xs">
                                 👤
                             </div>
-                            <span className="text-xs text-gray-500">Client</span>
+                            <span className="text-xs text-gray-500">{t.process.client}</span>
                         </div>
                     </div>
                 </div>
@@ -40,7 +41,7 @@ const ProcessSection = () => {
                     <div className="max-w-3xl">
                         <div className="bg-gray-200 rounded-3xl rounded-tl-sm px-6 py-4 shadow-sm">
                             <span className="text-base leading-relaxed text-gray-900" style={{ fontFamily: 'var(--font-body)' }}>
-                                We're a boutique coffee roastery selling specialty beans online. Need e-commerce, blog, and a clean aesthetic.
+                                {t.process.message1b}
                             </span>
                         </div>
                     </div>
@@ -51,11 +52,11 @@ const ProcessSection = () => {
                     <div className="max-w-2xl">
                         <div className="rounded-3xl rounded-tr-sm px-6 py-4 shadow-md" style={{ backgroundColor: 'var(--foreground)' }}>
                             <span className="text-base leading-relaxed" style={{ fontFamily: 'var(--font-body)', color: 'var(--background)' }}>
-                                Perfect, I love coffee projects!
+                                {t.process.message2}
                             </span>
                         </div>
                         <div className="flex items-center gap-2 mt-2 px-2 justify-end">
-                            <span className="text-xs text-gray-500">You</span>
+                            <span className="text-xs text-gray-500">{t.process.you}</span>
                             <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs" style={{ backgroundColor: 'var(--foreground)' }}>
                                 💻
                             </div>
@@ -67,9 +68,7 @@ const ProcessSection = () => {
                 <div className="story-text chat-message-2 flex justify-end">
                     <div className="max-w-3xl">
                         <div className="rounded-3xl rounded-tr-sm px-6 py-4 shadow-md" style={{ backgroundColor: 'var(--foreground)' }}>
-                            <span className="text-base leading-relaxed" style={{ fontFamily: 'var(--font-body)', color: 'var(--background)' }}>
-                                I'll start with a complete <span className="font-semibold">design mockup</span>. Once approved, I'll <span className="font-semibold">develop the website</span> with e-commerce integration and deploy it!
-                            </span>
+                            <span className="text-base leading-relaxed" style={{ fontFamily: 'var(--font-body)', color: 'var(--background)' }} dangerouslySetInnerHTML={{ __html: t.process.message2b }} />
                         </div>
                     </div>
                 </div>
@@ -79,7 +78,7 @@ const ProcessSection = () => {
                     <div className="max-w-xl">
                         <div className="bg-gray-200 rounded-3xl rounded-tl-sm px-6 py-4 shadow-sm">
                             <span className="text-base leading-relaxed text-gray-900" style={{ fontFamily: 'var(--font-body)' }}>
-                                Excellent! When do we start? ☕
+                                {t.process.message3}
                             </span>
                         </div>
                     </div>
@@ -87,8 +86,12 @@ const ProcessSection = () => {
 
                 {/* CTA Button */}
                 <div className="cta-button flex justify-center pt-20">
-                    <button className="px-16 py-6 rounded-full text-xl font-semibold transition-all flex items-center gap-4 shadow-xl hover:shadow-2xl" style={{ backgroundColor: 'var(--foreground)', color: 'var(--background)' }}>
-                        <span>Now!</span>
+                    <button
+                        onClick={onOpenContact}
+                        className="w-full md:w-auto px-8 md:px-16 py-6 rounded-full text-xl font-semibold transition-all flex items-center justify-center gap-4 shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95"
+                        style={{ backgroundColor: 'var(--foreground)', color: 'var(--background)' }}
+                    >
+                        <span>{t.process.cta}</span>
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>

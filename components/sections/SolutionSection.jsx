@@ -3,8 +3,11 @@
 import { motion } from 'framer-motion'
 import StepIndicator from '../ui/StepIndicator'
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { useLanguage } from '@/context/LanguageContext'
 
 const SolutionSection = () => {
+    const { t } = useLanguage()
+
     return (
         <section className="px-6 md:px-16 py-24" style={{ backgroundColor: 'var(--background)' }}>
             <div className="max-w-7xl mx-auto">
@@ -16,7 +19,7 @@ const SolutionSection = () => {
                     viewport={{ once: true }}
                     className="text-4xl md:text-6xl font-bold text-gray-900 text-center mb-12"
                 >
-                    Solution
+                    {t.solution.title}
                 </motion.h2>
 
                 {/* Step indicator */}
@@ -27,10 +30,10 @@ const SolutionSection = () => {
                     viewport={{ once: true }}
                 >
                     <StepIndicator
-                        number="05"
-                        line1="Creativity takes place"
+                        number={t.solution.step}
+                        line1={t.solution.line1}
                         line2="."
-                        highlightedWord="for the design"
+                        highlightedWord={t.solution.highlightedWord}
                         className="mb-20"
                     />
                 </motion.div>
@@ -51,7 +54,7 @@ const SolutionSection = () => {
                         >
                             <img
                                 src="/solution/laptop.png"
-                                alt="Coffee website on MacBook"
+                                alt={t.solution.altLaptop}
                                 className="w-full h-auto drop-shadow-2xl transform hover:scale-[1.02] transition-transform duration-700"
                                 loading="lazy"
                             />
@@ -81,7 +84,7 @@ const SolutionSection = () => {
                             >
                                 <img
                                     src="/solution/iphone.png"
-                                    alt="Coffee website on iPhone"
+                                    alt={t.solution.altIphone}
                                     className="w-full h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
                                     loading="lazy"
                                 />
@@ -117,9 +120,9 @@ const SolutionSection = () => {
                                             </svg>
                                         </div>
                                         <div className="flex-1 space-y-2">
-                                            <CardTitle className="text-xl font-bold text-gray-900">Highlight the product</CardTitle>
+                                            <CardTitle className="text-xl font-bold text-gray-900">{t.solution.feature1.title}</CardTitle>
                                             <CardDescription className="text-base text-gray-600 leading-relaxed font-medium">
-                                                Emphasizing usefulness allows addressing a neutral clientele effectively, focusing on value and clarity.
+                                                {t.solution.feature1.description}
                                             </CardDescription>
                                         </div>
                                     </div>
@@ -153,9 +156,9 @@ const SolutionSection = () => {
                                             </svg>
                                         </div>
                                         <div className="flex-1 space-y-2">
-                                            <CardTitle className="text-xl font-bold text-gray-900">Light and warm design</CardTitle>
+                                            <CardTitle className="text-xl font-bold text-gray-900">{t.solution.feature2.title}</CardTitle>
                                             <CardDescription className="text-base text-gray-600 leading-relaxed font-medium">
-                                                A welcoming atmosphere created through carefully selected colors, soft borders, and custom illustrations.
+                                                {t.solution.feature2.description}
                                             </CardDescription>
                                         </div>
                                     </div>
