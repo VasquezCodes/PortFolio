@@ -8,7 +8,7 @@ const AnalysisSection = () => {
     const { t } = useLanguage()
 
     return (
-        <section className="min-h-[100dvh] px-4 md:px-16 py-32 relative" style={{ backgroundColor: 'var(--background)' }}>
+        <section className="min-h-[calc(var(--vh,1vh)*100)] px-4 md:px-16 py-32 relative" style={{ backgroundColor: 'var(--background)' }}>
 
             {/* Step indicator 03 - Analysis */}
             <StepIndicator
