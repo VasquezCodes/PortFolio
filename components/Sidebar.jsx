@@ -11,7 +11,7 @@ const Sidebar = ({ activeSection, scrollToSection }) => {
     })
 
     return (
-        <aside className="hidden md:flex fixed left-0 top-0 h-screen w-80 border-r z-50 flex-col justify-between p-8" style={{ backgroundColor: 'var(--light-gray)', borderColor: 'var(--medium-gray)' }}>
+        <aside className="hidden md:flex fixed left-0 top-0 h-[100dvh] w-80 border-r z-50 flex-col justify-between p-8" style={{ backgroundColor: 'var(--light-gray)', borderColor: 'var(--medium-gray)' }}>
 
             {/* Logo / Profile */}
             <div className="flex flex-col items-center">

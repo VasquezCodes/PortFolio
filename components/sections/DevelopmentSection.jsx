@@ -95,16 +95,22 @@ const DevelopmentSection = () => {
                         <div
                             ref={containerRef}
                             className="relative w-full aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-900 bg-[#1e1e1e] flex"
-                            onTouchMove={handleTouchMove}
                         >
                             <div className="h-full overflow-hidden relative" style={{ width: `${sliderPosition}%` }}>
                                 <CodeWindow startAnimation={startAnimation} onStepComplete={handleStepComplete} />
                             </div>
 
+                            {/* Drag Handle */}
                             <div
-                                className="w-1 bg-white cursor-col-resize z-20 relative flex items-center justify-center hover:bg-orange-500 transition-colors"
+                                className="absolute top-0 bottom-0 z-20 flex items-center justify-center cursor-col-resize group"
+                                style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)', width: '40px', touchAction: 'none' }}
                                 onMouseDown={handleMouseDown}
+                                onTouchMove={handleTouchMove}
                             >
+                                {/* Visible Line */}
+                                <div className="w-1 h-full bg-white group-hover:bg-orange-500 transition-colors" />
+
+                                {/* Circular Handle Icon */}
                                 <div className="absolute w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg z-30 pointer-events-none text-gray-900">
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4m0 6l-4 4-4-4" />

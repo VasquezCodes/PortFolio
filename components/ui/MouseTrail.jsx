@@ -85,7 +85,7 @@ const MouseTrail = () => {
                 <div
                     key={index}
                     ref={(el) => (circlesRef.current[index] = el)}
-                    className="fixed pointer-events-none z-50 rounded-full hidden md:block"
+                    className="fixed pointer-events-none z-[200000] rounded-full hidden md:block"
                     style={{
                         height: "24px",
                         width: "24px",
