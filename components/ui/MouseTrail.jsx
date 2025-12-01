@@ -2,9 +2,10 @@
 
 import { useEffect, useRef } from "react";
 
-const MouseTrail = () => {
+const MouseTrail = ({ isLoading }) => {
     const coords = useRef({ x: 0, y: 0 });
     const circlesRef = useRef([]);
+    const loadingRingRef = useRef(null);
 
     const colors = [
         "#001a80",
@@ -50,22 +51,31 @@ const MouseTrail = () => {
             let x = coords.current.x;
             let y = coords.current.y;
 
-            circles.forEach((circle, index) => {
-                if (!circle) return;
-
-                circle.style.left = x - 12 + "px";
-                circle.style.top = y - 12 + "px";
-                circle.style.scale = (circles.length - index) / circles.length;
-
-                circle.x = x;
-                circle.y = y;
-
-                const nextCircle = circles[index + 1] || circles[0];
-                if (nextCircle) {
-                    x += (nextCircle.x - x) * 0.3;
-                    y += (nextCircle.y - y) * 0.3;
+            if (isLoading) {
+                // Loading Ring Animation
+                if (loadingRingRef.current) {
+                    loadingRingRef.current.style.left = x - 20 + "px"; // Center the 40px ring
+                    loadingRingRef.current.style.top = y - 20 + "px";
                 }
-            });
+            } else {
+                // Standard Trail Animation
+                circles.forEach((circle, index) => {
+                    if (!circle) return;
+
+                    circle.style.left = x - 12 + "px";
+                    circle.style.top = y - 12 + "px";
+                    circle.style.scale = (circles.length - index) / circles.length;
+
+                    circle.x = x;
+                    circle.y = y;
+
+                    const nextCircle = circles[index + 1] || circles[0];
+                    if (nextCircle) {
+                        x += (nextCircle.x - x) * 0.3;
+                        y += (nextCircle.y - y) * 0.3;
+                    }
+                });
+            }
 
             animationFrameId = requestAnimationFrame(animateCircles);
         };
@@ -77,24 +87,37 @@ const MouseTrail = () => {
             window.removeEventListener("mousemove", handleMouseMove);
             cancelAnimationFrame(animationFrameId);
         };
-    }, []);
+    }, [isLoading]);
 
     return (
         <>
-            {colors.map((color, index) => (
+            {isLoading ? (
                 <div
-                    key={index}
-                    ref={(el) => (circlesRef.current[index] = el)}
-                    className="fixed pointer-events-none z-[200000] rounded-full hidden md:block"
+                    ref={loadingRingRef}
+                    className="fixed pointer-events-none z-[200000] rounded-full hidden md:block border-2 border-t-transparent border-black animate-spin"
                     style={{
-                        height: "24px",
-                        width: "24px",
-                        backgroundColor: color,
+                        height: "40px",
+                        width: "40px",
                         top: "-100px",
                         left: "-100px",
                     }}
                 />
-            ))}
+            ) : (
+                colors.map((color, index) => (
+                    <div
+                        key={index}
+                        ref={(el) => (circlesRef.current[index] = el)}
+                        className="fixed pointer-events-none z-[200000] rounded-full hidden md:block"
+                        style={{
+                            height: "24px",
+                            width: "24px",
+                            backgroundColor: color,
+                            top: "-100px",
+                            left: "-100px",
+                        }}
+                    />
+                ))
+            )}
         </>
     );
 };

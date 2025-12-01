@@ -18,6 +18,7 @@ import FAQSection from '@/components/sections/FAQSection'
 import AboutSection from '@/components/sections/AboutSection'
 import { useLanguage } from '@/context/LanguageContext'
 import ContactDrawer from '@/components/ContactDrawer'
+import MouseTrail from '@/components/ui/MouseTrail'
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
@@ -169,6 +170,7 @@ export default function Home() {
 
   return (
     <>
+      <MouseTrail isLoading={isLoading} />
       {/* LOADING SCREEN */}
       <AnimatePresence>
         {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}

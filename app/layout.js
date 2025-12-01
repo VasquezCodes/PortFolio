@@ -38,7 +38,6 @@ export const metadata = {
 };
 
 import { LanguageProvider } from "@/context/LanguageContext";
-import MouseTrail from "@/components/ui/MouseTrail";
 
 export default function RootLayout({ children }) {
   return (
@@ -47,7 +46,6 @@ export default function RootLayout({ children }) {
         className={`${inter.variable} ${urbanist.variable} ${poppins.variable} ${spaceMono.variable} ${playfair.variable} antialiased`}
       >
         <LanguageProvider>
-          <MouseTrail />
           {children}
         </LanguageProvider>
       </body>

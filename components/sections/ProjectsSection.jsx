@@ -78,7 +78,7 @@ const ProjectsSection = () => {
     ]
 
     return (
-        <section id="projects" className="min-h-screen px-4 md:px-16 py-32">
+        <section id="projects" className="min-h-[100dvh] px-4 md:px-16 py-32">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8">
                     <h2 className="text-4xl md:text-5xl font-bold flex items-center gap-2">

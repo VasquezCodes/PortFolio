@@ -6,7 +6,7 @@ const AboutSection = () => {
     const { t } = useLanguage()
 
     return (
-        <section id="about" className="min-h-screen px-4 md:px-16 py-32" style={{ backgroundColor: 'var(--background)' }}>
+        <section id="about" className="min-h-[100dvh] px-4 md:px-16 py-32" style={{ backgroundColor: 'var(--background)' }}>
             <div className="max-w-6xl mx-auto">
                 <div className="mb-16">
                     <h1 className="text-4xl md:text-7xl font-bold mb-4" style={{ color: 'var(--foreground)' }}>{t.about.title}</h1>

@@ -7,7 +7,7 @@ const ProcessSection = ({ onOpenContact }) => {
     const { t } = useLanguage()
 
     return (
-        <section id="process" className="min-h-screen px-4 md:px-16 py-32 relative" style={{ backgroundColor: 'var(--background)' }}>
+        <section id="process" className="min-h-[100dvh] px-4 md:px-16 py-32 relative" style={{ backgroundColor: 'var(--background)' }}>
 
             {/* Step indicator con typewriter effect */}
             <StepIndicator
