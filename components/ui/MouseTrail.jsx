@@ -34,7 +34,6 @@ const MouseTrail = ({ isLoading }) => {
         const circles = circlesRef.current;
         let animationFrameId;
 
-        // Initialize circle positions
         circles.forEach((circle) => {
             if (circle) {
                 circle.x = 0;
@@ -58,7 +57,6 @@ const MouseTrail = ({ isLoading }) => {
                     loadingRingRef.current.style.top = y - 20 + "px";
                 }
             } else {
-                // Standard Trail Animation
                 circles.forEach((circle, index) => {
                     if (!circle) return;
 
